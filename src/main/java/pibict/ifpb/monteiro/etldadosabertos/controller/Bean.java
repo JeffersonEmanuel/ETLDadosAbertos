@@ -21,6 +21,7 @@ import pibict.ifpb.monteiro.etldadosabertos.util.LerArquivo;
 public class Bean implements Serializable {
 
     private String link;
+    private String nomeTabela;
     private LerArquivo ler;
     private List<String> listaDeAtributos;
     private List<String> listaDeRegistros;
@@ -39,7 +40,7 @@ public class Bean implements Serializable {
 
         ler.lerArquivoTxt();
         GerarAtributos atributos = new GerarAtributos();
-        atributos.gerarTabela(ler.getListaDeAtributos());
+        atributos.gerarTabela(ler.getListaDeAtributos(), nomeTabela);
 //        listaDeAtributos = ler.getListaDeAtributos();
 //        listaDeRegistros = ler.getListaDeRegistros();
         ExcluirArquivos.removerArquivos(ConstantesDoSistema.diretorio);
@@ -59,6 +60,14 @@ public class Bean implements Serializable {
 
     public List<String> getListaDeRegistros() {
         return listaDeRegistros;
+    }
+
+    public String getNomeTabela() {
+        return nomeTabela;
+    }
+
+    public void setNomeTabela(String nomeTabela) {
+        this.nomeTabela = nomeTabela;
     }
 
 }

@@ -18,36 +18,45 @@ public class GerarAtributos {
     public GerarAtributos() {
     }
 
-    public void gerarTabela(List<String> atributos) {
+    public static Connection con() {
+        String url = "jdbc:postgresql://localhost:5432/etldadosabertos";
+        String usuario = "admin";
+        String senha = "123";
+        Connection con = null;
         try {
-            String url = "jdbc:postgresql://localhost:5432/etldadosabertos";
-            String usuario = "admin";
-            String senha = "123";
-
             Class.forName("org.postgresql.Driver");
-
-            Connection con;
-
             con = DriverManager.getConnection(url, usuario, senha);
 
             System.out.println("Conexão realizada com sucesso.");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GerarAtributos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GerarAtributos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return con;
+    }
 
-            Statement stmt = con.createStatement();
+    public void gerarTabela(List<String> atributos, String nomeTabela) {
+        try {
+
+            Statement stmt = con().createStatement();
+//            stmt.executeUpdate("DROP TABLE tabela_modelo");
             String t = null;
             for (String atributo : atributos) {
                 atributo = atributo.replace(" ", "_");
+                atributo = atributo.replace("(", "_");
+                atributo = atributo.replace(")", "_");
+                atributo = atributo.replace("/", "_");
                 t += atributo + " VARCHAR(254),";
             }
             t = t.substring(4, (t.length() - 1));
-            String sql = "CREATE TABLE tabela_modelo(" + t + ")";
+            String sql = "CREATE TABLE "+nomeTabela+"(" + t + ")";
             System.out.println(sql);
             stmt.executeUpdate(sql);
-            con.close();
+            con().close();
             System.out.println("Completo com Sucesso");
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GerarAtributos.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
