@@ -31,7 +31,7 @@ public class LerArquivo {
             String linha = lerArq.readLine();
 
             if (i == 0) {
-                atributos = linha.replace("\"", " ");
+                atributos = linha.replace("\"", "");
                 listaDeAtributos = Arrays.asList(atributos.split(","));
                 linha = lerArq.readLine();
                 i++;

@@ -20,7 +20,7 @@ public class GerarAtributos {
 
     public void gerarTabela(List<String> atributos) {
         try {
-            String url = "jdbc:postgresql://localhost:5432/cidade_dados_abertos";
+            String url = "jdbc:postgresql://localhost:5432/etldadosabertos";
             String usuario = "admin";
             String senha = "123";
 
@@ -32,26 +32,23 @@ public class GerarAtributos {
 
             System.out.println("Conexão realizada com sucesso.");
 
-            Statement stm = con.createStatement();
-
             Statement stmt = con.createStatement();
             String t = null;
             for (String atributo : atributos) {
-                t += " " + atributo + " VARCHAR(254),";
+                atributo = atributo.replace(" ", "_");
+                t += atributo + " VARCHAR(254),";
             }
-            t = t.substring(5, (t.length()-1));
-            String sql = "CREATE TABLE tabela_modelo("+t+")";
+            t = t.substring(4, (t.length() - 1));
+            String sql = "CREATE TABLE tabela_modelo(" + t + ")";
+            System.out.println(sql);
             stmt.executeUpdate(sql);
             con.close();
             System.out.println("Completo com Sucesso");
         } catch (SQLException e) {
+            e.printStackTrace();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GerarAtributos.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-    }
-
-    public static void main(String[] args) {
 
     }
 
