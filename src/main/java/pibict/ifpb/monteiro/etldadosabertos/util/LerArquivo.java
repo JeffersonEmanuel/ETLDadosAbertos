@@ -30,27 +30,68 @@ public class LerArquivo {
 
             String linha = lerArq.readLine();
 
+            boolean atributoGIS = false;
             if (i == 0) {
                 atributos = linha.replace("\"", "");
                 listaDeAtributos = Arrays.asList(atributos.split(","));
+                atributoGIS = verificarAtributo(listaDeAtributos);
                 linha = lerArq.readLine();
                 i++;
             }
 
+            boolean registroGIS = false;
             while (linha != null) {
-                System.out.println(atributos);
                 linha = linha.replace("\"", " ");
                 listaDeRegistros = Arrays.asList(linha.split(","));
-                System.out.println(linha);
-
+                registroGIS = verificarValorGIS(listaDeRegistros);
                 linha = lerArq.readLine();
             }
+            System.out.println("Registro existe? " + registroGIS + " // Atributo existe? " + atributoGIS);
 
         } catch (IOException e) {
 
             System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage());
         }
-        System.out.println();
+    }
+
+    /**
+     * Verificar entre as linhas, se os valores contêm indícios de
+     * registros geométricos (POINT, LINE, MULTIPOINT, POLYGON) e 
+     * retorna verdadeiro (TRUE) caso exista, ou, 
+     * retorna falso (FALSE) caso não exista.
+     * 
+     * @param listaDeLinhas
+     * @return TRUE or FALSE
+     */
+    private boolean verificarValorGIS(List<String> listaDeLinhas) {
+        for (String atributo : listaDeLinhas) {
+            if (atributo.contains(ConstantesDoSistema.valorLINE)
+                    || atributo.contains(ConstantesDoSistema.valorPOINT)
+                    || atributo.contains(ConstantesDoSistema.valorPOLYGON)
+                    || atributo.contains(ConstantesDoSistema.valorMULTIPOINT)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Verificar entre os atributos, se contêm 
+     * a sequência de caracteres "geom", caso exista
+     * retorna verdadeiro (TRUE), caso não exista
+     * retorna falso (FALSE).
+     * 
+     * @param listaDeAtributos
+     * @return TRUE or FALSE
+     */
+    private boolean verificarAtributo(List<String> listaDeAtributos) {
+        for (String atributo : listaDeAtributos) {
+            atributo = atributo.toLowerCase();
+            if (atributo.contains("geom")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public List<String> getListaDeAtributos() {

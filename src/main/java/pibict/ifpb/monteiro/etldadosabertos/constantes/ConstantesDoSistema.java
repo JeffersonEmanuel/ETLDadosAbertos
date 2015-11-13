@@ -7,7 +7,12 @@ package pibict.ifpb.monteiro.etldadosabertos.constantes;
  */
 public class ConstantesDoSistema {
 
-    public static String diretorio = "/home/jefferson/TesteDownload/";
-    public static String arquivo = "/home/jefferson/TesteDownload/temporario";
+    public static String diretorio = "/home/matheusoliveira/TesteDownload/";
+    public static String arquivo = "/home/matheusoliveira/TesteDownload/temporario";
     
+    //Valores GIS
+    public static String valorPOINT = "POINT";
+    public static String valorMULTIPOINT = "MULTIPOINT";
+    public static String valorPOLYGON = "POLYGON";
+    public static String valorLINE = "LINE";
 }
