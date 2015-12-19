@@ -3,13 +3,12 @@ package pibict.ifpb.monteiro.etldadosabertos.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.TreeMap;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import pibict.ifpb.monteiro.etldadosabertos.constantes.ConstantesDoSistema;
-import pibict.ifpb.monteiro.etldadosabertos.util.BaixarDeURL;
-import pibict.ifpb.monteiro.etldadosabertos.util.ExcluirArquivos;
-import pibict.ifpb.monteiro.etldadosabertos.util.GerarAtributos;
-import pibict.ifpb.monteiro.etldadosabertos.util.LerArquivo;
+import pibict.ifpb.monteiro.etldadosabertos.model.BaseDeDadosModel;
 
 /**
  *
@@ -20,30 +19,46 @@ import pibict.ifpb.monteiro.etldadosabertos.util.LerArquivo;
 @SessionScoped
 public class Bean implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     private String link;
     private String nomeTabela;
-    private LerArquivo ler;
-    private List<String> listaDeAtributos;
-    private List<String> listaDeRegistros;
+    private List<BaseDeDadosModel> listaDeLinks;
+//    private LerArquivo ler;
+//    private List<String> listaDeAtributos;
+//    private List<String> listaDeRegistros;
 
     public Bean() {
-        ler = new LerArquivo();
-        listaDeAtributos = new ArrayList<>();
-        listaDeRegistros = new ArrayList<>();
-        listaDeAtributos.add("");
+//        ler = new LerArquivo();
+//        listaDeAtributos = new ArrayList<>();
+//        listaDeRegistros = new ArrayList<>();
+//        listaDeAtributos.add("");
+        listaDeLinks = new ArrayList<>();
+    }
+//
+//    public void enviar() {
+//
+//        BaixarDeURL.gravaArquivoDeURL(getLink(),
+//                ConstantesDoSistema.diretorio);
+//
+//        ler.lerArquivoTxt();
+//        GerarAtributos atributos = new GerarAtributos();
+//        atributos.gerarTabela(ler.getListaDeAtributos(), nomeTabela);
+////        listaDeAtributos = ler.getListaDeAtributos();
+////        listaDeRegistros = ler.getListaDeRegistros();
+//        ExcluirArquivos.removerArquivos(ConstantesDoSistema.diretorio);
+//    }
+
+    public void adicionarRegistros() {
+        listaDeLinks.add(new BaseDeDadosModel(link, nomeTabela));
+        link = null;
+        nomeTabela = null;
+
     }
 
-    public void enviar() {
+    public void removerRegistros() {
+        listaDeLinks.remove(0);
 
-        BaixarDeURL.gravaArquivoDeURL(getLink(),
-                ConstantesDoSistema.diretorio);
-
-        ler.lerArquivoTxt();
-        GerarAtributos atributos = new GerarAtributos();
-        atributos.gerarTabela(ler.getListaDeAtributos(), nomeTabela);
-//        listaDeAtributos = ler.getListaDeAtributos();
-//        listaDeRegistros = ler.getListaDeRegistros();
-        ExcluirArquivos.removerArquivos(ConstantesDoSistema.diretorio);
     }
 
     public String getLink() {
@@ -54,20 +69,20 @@ public class Bean implements Serializable {
         this.link = link;
     }
 
-    public List<String> getListaDeAtributos() {
-        return listaDeAtributos;
-    }
-
-    public List<String> getListaDeRegistros() {
-        return listaDeRegistros;
-    }
-
     public String getNomeTabela() {
         return nomeTabela;
     }
 
     public void setNomeTabela(String nomeTabela) {
         this.nomeTabela = nomeTabela;
+    }
+
+    public List<BaseDeDadosModel> getListaDeLinks() {
+        return listaDeLinks;
+    }
+
+    public void setListaDeLinks(List<BaseDeDadosModel> listaDeLinks) {
+        this.listaDeLinks = listaDeLinks;
     }
 
 }

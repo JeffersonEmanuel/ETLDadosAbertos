@@ -5,19 +5,48 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">  
 
     <h:head>  
+        <link rel="stylesheet" type="text/css" href="css/estilo.css" />
+        <h:outputScript library="primefaces" name="jquery/jquery.js" />
 
     </h:head>  
 
     <h:body>  
-        <h:form id="idLink">
-            <h:outputLabel value="Link: "/>
-            <p:inputText value="#{bean.link}" /> 
-            <br/>
-            <h:outputLabel value="Nome da Tabela: "/>
-            <p:inputText value="#{bean.nomeTabela}" />  
-            <p:commandButton value="enviar" actionListener="#{bean.enviar()}"/>
-        </h:form>
+        <div style="height: 45px;background-color: skyblue;width: 100%; " >
+            <div style="display: table; width: 100%;">
+                <div style="width: 50%;  float: left;margin-left: 5%;"> 
+                </div>
+            </div>
+        </div>
 
+
+
+
+
+
+        <h:form id="formPrincipal">
+
+            <h:panelGrid columns="2">
+                <h:outputText value="Nome da Base de Dados: " style="margin-right: 400"/>
+                <h:outputText value="Link Base de Dados: "/>
+                <p:inputText value="#{bean.nomeTabela}" size="40"/>
+                <p:inputText value="#{bean.link}" size="100"/>
+            </h:panelGrid>
+
+
+
+            <h:dataTable value="#{bean.listaDeLinks}" var="dado" >
+                <h:column>
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Nome da Base de Dados: " style="margin-right: 400"/>
+                        <h:outputText value="Link Base de Dados: "/>
+                        <p:inputText value="#{dado.link}" size="40"/>
+                        <p:inputText value="#{dado.nomeTabela}" size="100"/>
+                    </h:panelGrid>
+                </h:column>
+            </h:dataTable>
+            <h:commandButton value="Adicionar" action="#{bean.adicionarRegistros}" />
+            <h:commandButton value="Remover" action="#{bean.removerRegistros}" />
+        </h:form>
 
 
     </h:body>  
