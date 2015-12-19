@@ -49,15 +49,16 @@ public class Bean implements Serializable {
 //        ExcluirArquivos.removerArquivos(ConstantesDoSistema.diretorio);
 //    }
 
-    public void adicionarRegistros() {
+    public String adicionarRegistros() {
         listaDeLinks.add(new BaseDeDadosModel(link, nomeTabela));
         link = null;
         nomeTabela = null;
+        return "ETLDadosAbertos/index.xhtml";
 
     }
 
-    public void removerRegistros() {
-        listaDeLinks.remove(0);
+    public void removerRegistros(BaseDeDadosModel baseDeDadosModel) {
+        listaDeLinks.remove(baseDeDadosModel);
 
     }
 

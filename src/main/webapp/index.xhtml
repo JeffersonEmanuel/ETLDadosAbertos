@@ -11,41 +11,38 @@
     </h:head>  
 
     <h:body>  
-        <div style="height: 45px;background-color: skyblue;width: 100%; " >
-            <div style="display: table; width: 100%;">
-                <div style="width: 50%;  float: left;margin-left: 5%;"> 
-                </div>
-            </div>
+        <div style="height: 45px;background-color: dimgrey;width: 100%; " >
+
         </div>
-
-
-
-
-
 
         <h:form id="formPrincipal">
 
-            <h:panelGrid columns="2">
-                <h:outputText value="Nome da Base de Dados: " style="margin-right: 400"/>
-                <h:outputText value="Link Base de Dados: "/>
-                <p:inputText value="#{bean.nomeTabela}" size="40"/>
-                <p:inputText value="#{bean.link}" size="100"/>
-            </h:panelGrid>
+            <div style="height: 85px; margin-top: 10; background-color: blanchedalmond;width: 100%;" >
+                <div style="height: 8; background-color: blanchedalmond;width: 100%;" ></div>
+                    <h:panelGrid columns="2" style="margin-left: 15" id="painelBase">
+                        <h:outputText value="Nome da Base de Dados: " style="margin-right: 450;"/>
+                        <h:outputText value="Link Base de Dados: "/>
+                        <p:inputText value="#{bean.nomeTabela}" size="50"/>
+                        <p:row>
+                            <p:inputText value="#{bean.link}" size="100"/>
+                            <p:commandButton value="Adicionar" action="#{bean.adicionarRegistros}"
+                                             style="margin-left: 20" update="formPrincipal" process="@all"/>
+                        </p:row>
+                    </h:panelGrid>
+            </div>
 
-
-
-            <h:dataTable value="#{bean.listaDeLinks}" var="dado" >
+            <h:dataTable value="#{bean.listaDeLinks}" var="dado" id="painelAmostra" style="margin-left: 15" >
                 <h:column>
                     <h:panelGrid columns="2">
-                        <h:outputText value="Nome da Base de Dados: " style="margin-right: 400"/>
+                        <h:outputText value="Nome da Base de Dados: " style="margin-right: 450"/>
                         <h:outputText value="Link Base de Dados: "/>
-                        <p:inputText value="#{dado.link}" size="40"/>
+                        <p:inputText value="#{dado.link}" size="50"/>
                         <p:inputText value="#{dado.nomeTabela}" size="100"/>
+                        <h:commandButton value="Remover" action="#{bean.removerRegistros(dado)}" />
                     </h:panelGrid>
                 </h:column>
             </h:dataTable>
-            <h:commandButton value="Adicionar" action="#{bean.adicionarRegistros}" />
-            <h:commandButton value="Remover" action="#{bean.removerRegistros}" />
+
         </h:form>
 
 
