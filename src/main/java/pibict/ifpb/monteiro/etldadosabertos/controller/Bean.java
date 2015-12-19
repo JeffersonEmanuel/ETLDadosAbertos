@@ -50,6 +50,7 @@ public class Bean implements Serializable {
 //    }
 
     public String adicionarRegistros() {
+        
         listaDeLinks.add(new BaseDeDadosModel(link, nomeTabela));
         link = null;
         nomeTabela = null;
