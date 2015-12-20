@@ -1,5 +1,8 @@
 package pibict.ifpb.monteiro.etldadosabertos.constantes;
 
+import javax.faces.context.FacesContext;
+
+
 /**
  *
  * @author Jefferson Emanuel Caldeira da Silva <jefferson.ecs@gmail.com>
@@ -7,8 +10,16 @@ package pibict.ifpb.monteiro.etldadosabertos.constantes;
  */
 public class ConstantesDoSistema {
 
-    public static String diretorio = "/home/matheusoliveira/TesteDownload/";
-    public static String arquivo = "/home/matheusoliveira/TesteDownload/temporario";
+    private String pegarCaminho() {
+        return FacesContext.getCurrentInstance().getExternalContext().getRealPath("/ArquivosTemporarios/");
+    }
+
+
+    public String arquivo () {
+        String caminho = pegarCaminho() + "temporario";
+        return caminho;
+    }
+    
     
     //Valores GIS
     public static String valorPOINT = "POINT";

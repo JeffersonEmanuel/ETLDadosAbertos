@@ -3,12 +3,12 @@ package pibict.ifpb.monteiro.etldadosabertos.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.TreeMap;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import pibict.ifpb.monteiro.etldadosabertos.model.BaseDeDadosModel;
+import pibict.ifpb.monteiro.etldadosabertos.util.BaixarDeURL;
+import pibict.ifpb.monteiro.etldadosabertos.util.ExcluirArquivos;
+import pibict.ifpb.monteiro.etldadosabertos.util.LerArquivo;
 
 /**
  *
@@ -24,38 +24,39 @@ public class Bean implements Serializable {
     private String link;
     private String nomeTabela;
     private List<BaseDeDadosModel> listaDeLinks;
-//    private LerArquivo ler;
-//    private List<String> listaDeAtributos;
+    private LerArquivo ler;
+    BaixarDeURL baixarDeURL;
+    private List<String> listaDeAtributos;
 //    private List<String> listaDeRegistros;
 
     public Bean() {
-//        ler = new LerArquivo();
-//        listaDeAtributos = new ArrayList<>();
+        ler = new LerArquivo();
+        listaDeAtributos = new ArrayList<>();
 //        listaDeRegistros = new ArrayList<>();
 //        listaDeAtributos.add("");
         listaDeLinks = new ArrayList<>();
+        baixarDeURL = new BaixarDeURL();
     }
 //
 //    public void enviar() {
 //
-//        BaixarDeURL.gravaArquivoDeURL(getLink(),
-//                ConstantesDoSistema.diretorio);
+       
 //
 //        ler.lerArquivoTxt();
 //        GerarAtributos atributos = new GerarAtributos();
 //        atributos.gerarTabela(ler.getListaDeAtributos(), nomeTabela);
 ////        listaDeAtributos = ler.getListaDeAtributos();
-////        listaDeRegistros = ler.getListaDeRegistros();
+//        listaDeRegistros = ler.getListaDeRegistros();
 //        ExcluirArquivos.removerArquivos(ConstantesDoSistema.diretorio);
 //    }
 
-    public String adicionarRegistros() {
-        
+    public void adicionarRegistros() {
+        baixarDeURL.gravaArquivoDeURL(link);
         listaDeLinks.add(new BaseDeDadosModel(link, nomeTabela));
         link = null;
         nomeTabela = null;
-        return "ETLDadosAbertos/index.xhtml";
-
+         ler.lerArquivoTxt();
+         listaDeAtributos = ler.getListaDeAtributos();
     }
 
     public void removerRegistros(BaseDeDadosModel baseDeDadosModel) {
@@ -63,6 +64,7 @@ public class Bean implements Serializable {
 
     }
 
+    
     public String getLink() {
         return link;
     }
@@ -87,4 +89,12 @@ public class Bean implements Serializable {
         this.listaDeLinks = listaDeLinks;
     }
 
+    public List<String> getListaDeAtributos() {
+        return listaDeAtributos;
+    }
+
+    public void setListaDeAtributos(List<String> listaDeAtributos) {
+        this.listaDeAtributos = listaDeAtributos;
+    }
+    
 }

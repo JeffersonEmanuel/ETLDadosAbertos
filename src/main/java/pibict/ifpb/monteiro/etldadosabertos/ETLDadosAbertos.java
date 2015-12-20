@@ -22,13 +22,10 @@ public class ETLDadosAbertos {
 
         
         
-        BaixarDeURL.gravaArquivoDeURL(url,
-                ConstantesDoSistema.diretorio);
 
         LerArquivo ler = new LerArquivo();
         ler.lerArquivoTxt();
 
-        ExcluirArquivos.removerArquivos(ConstantesDoSistema.diretorio);
 
     }
 

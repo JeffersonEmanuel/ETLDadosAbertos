@@ -19,6 +19,7 @@ public class LerArquivo {
     private List<String> listaDeAtributos = new ArrayList<>();
 
     private List<String> listaDeRegistros = new ArrayList<>();
+    private ConstantesDoSistema cns = new ConstantesDoSistema();
 
     public void lerArquivoTxt() {
 
@@ -26,7 +27,7 @@ public class LerArquivo {
             int i = 0;
             String atributos = null;
 
-            BufferedReader lerArq = new BufferedReader(new InputStreamReader(new FileInputStream(ConstantesDoSistema.arquivo), "ISO-8859-3"));
+            BufferedReader lerArq = new BufferedReader(new InputStreamReader(new FileInputStream(cns.arquivo()), "ISO-8859-3"));
 
             String linha = lerArq.readLine();
 
@@ -55,11 +56,10 @@ public class LerArquivo {
     }
 
     /**
-     * Verificar entre as linhas, se os valores contêm indícios de
-     * registros geométricos (POINT, LINE, MULTIPOINT, POLYGON) e 
-     * retorna verdadeiro (TRUE) caso exista, ou, 
-     * retorna falso (FALSE) caso não exista.
-     * 
+     * Verificar entre as linhas, se os valores contêm indícios de registros
+     * geométricos (POINT, LINE, MULTIPOINT, POLYGON) e retorna verdadeiro
+     * (TRUE) caso exista, ou, retorna falso (FALSE) caso não exista.
+     *
      * @param listaDeLinhas
      * @return TRUE or FALSE
      */
@@ -76,11 +76,10 @@ public class LerArquivo {
     }
 
     /**
-     * Verificar entre os atributos, se contêm 
-     * a sequência de caracteres "geom", caso exista
-     * retorna verdadeiro (TRUE), caso não exista
-     * retorna falso (FALSE).
-     * 
+     * Verificar entre os atributos, se contêm a sequência de caracteres "geom",
+     * caso exista retorna verdadeiro (TRUE), caso não exista retorna falso
+     * (FALSE).
+     *
      * @param listaDeAtributos
      * @return TRUE or FALSE
      */
