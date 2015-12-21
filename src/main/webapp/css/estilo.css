@@ -4,3 +4,49 @@
     color: red;
     font-size: 500px;
 }
+
+.corpo-centro{
+    text-align: center;
+}
+
+.botao-generic{
+    border-radius: 10px;
+    font-size: 12pt;
+}
+
+.botao-home{
+    border-radius: 10px;
+    font-size: 12pt;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+#bt-index-voltar{
+    position: relative;
+    float: right;
+}
+
+label {
+    font-family: sans-serif;
+    font-size: 14pt;
+}
+
+fieldset{
+    height: 22%;
+    width: 20%;
+    margin-left: 40%;
+    margin-right: 60%;
+    margin-top: 18%;
+    text-align: center;
+    padding: 5px;
+    background: appworkspace;
+    border-radius: 20px;
+}
+
+.itextarea-query{
+    margin-left: 15%;
+    margin-right: 5.5%;
+    margin-top: 1%;
+    width: 70%;
+    height: 80%;
+}

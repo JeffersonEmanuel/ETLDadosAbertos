@@ -13,26 +13,27 @@
     <h:body>  
         <div style="height: 5%; background-color: dimgrey; width: 87%; margin-left: 5.3%;" >
 
+            <p:button id="bt-index-voltar" href="home.xhtml" value="Voltar" class="botao-generic"></p:button>
         </div>
 
         <h:form id="formPrincipal">
 
-            <div style="height: 9%; margin-top: 10; background-color: blanchedalmond; width: 87%; margin-left: 5.3%" >
+            <div style="height: 15%; margin-top: 5; background-color: blanchedalmond; width: 87%; margin-left: 5.3%" >
                 <div style="height: 8; background-color: blanchedalmond;width: 60%;" />
                 <h:panelGrid columns="2" style="margin-left: 2%" id="painelBase">
-                    <h:outputText value="Nome da Base de Dados: " style="margin-right: 470"/>
+                    <h:outputText value="Nome da Base de Dados: " style="margin-right: 40"/>
                     <h:outputText value="Link Base de Dados: "/>
-                    <p:inputText value="#{bean.nomeTabela}" size="45"/>
+                    <p:inputText value="#{bean.nomeTabela}" size="45" />
                     <p:row>
-                        <p:inputText value="#{bean.link}" size="78"/>
+                        <p:inputText value="#{bean.link}" size="45"/>
                         <p:commandButton value="Adicionar" action="#{bean.adicionarRegistros}"
-                                         style="margin-left: 20" update="formPrincipal" process="@all"/>
+                                         style="margin-left: 20px ; border-radius: 10px;" update="formPrincipal" process="@all"/>
                     </p:row>
                 </h:panelGrid>
             </div>
 
 
-            <div>
+            <div >
                 <h:dataTable value="#{bean.listaDeLinks}" var="dado" id="painelAmostra" style="margin-left: 5%" >
 
                     <p:column>
@@ -43,15 +44,15 @@
                                 <p:accordionPanel multiple="true">
                                     <p:tab title="#{dado.nomeTabela}" >
                                         <h:panelGrid columns="2">
-                                            <h:outputText value="Nome da Base de Dados: " style="margin-right: 450"/>
                                             <h:outputText value="Link Base de Dados: "/>
-                                            <p:inputText value="#{dado.nomeTabela}" size="50"/>
-                                            <p:inputText value="#{dado.link}" size="100"/>
+                                            <h:outputText value="Nome da Base de Dados: " style="margin-right: 450"/>
+                                            <p:inputText value="#{dado.link}" size="45" style="margin-right: 5px"/>
+                                            <p:inputText value="#{dado.nomeTabela}" size="45"/>
 
                                             <h:dataTable value="#{dado.atributos}" var="atributo" id="attr" style="column-span: 15" >
                                                 <p:column>
                                                     <h:panelGrid columns="#{atributos.size()}">
-                                                        <p:inputText value="#{atributo}" size="#{atributo.length()}"/>
+                                                        <p:inputText value="#{atributo}" size="25"/>
                                                     </h:panelGrid>
                                                 </p:column>
 
