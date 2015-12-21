@@ -48,14 +48,16 @@
                                             <p:inputText value="#{dado.nomeTabela}" size="50"/>
                                             <p:inputText value="#{dado.link}" size="100"/>
 
+                                            <h:dataTable value="#{dado.atributos}" var="atributo" id="attr" style="column-span: 15" >
+                                                <p:column>
+                                                    <h:panelGrid columns="#{atributos.size()}">
+                                                        <p:inputText value="#{atributo}" size="#{atributo.length()}"/>
+                                                    </h:panelGrid>
+                                                </p:column>
+
+                                            </h:dataTable>
                                         </h:panelGrid>
-                                        <h:dataTable value="#{bean.listaDeAtributos}" var="atributo" id="attr" style="column-span: 15" >
-                                            <p:column>
-                                                <h:panelGrid columns="#{bean.listaDeAtributos.size()}">
-                                                    <p:inputText value="#{atributo}" size="#{atributo.length()}"/>
-                                                </h:panelGrid>
-                                            </p:column>
-                                        </h:dataTable>
+
                                         <p:column>
                                             <p:commandButton value="Salvar Dados" action="#{bean.salvar()}" style="width: 100%; color: blue; background-color: transparent"/>
                                             <p:commandButton value="Remover" action="#{bean.removerRegistros(dado)}" style="width: 100%; color: red; top: 10; background-color: transparent"/>

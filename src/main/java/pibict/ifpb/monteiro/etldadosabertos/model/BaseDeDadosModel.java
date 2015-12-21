@@ -6,6 +6,7 @@
 package pibict.ifpb.monteiro.etldadosabertos.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  *
@@ -17,10 +18,12 @@ public class BaseDeDadosModel implements Serializable {
 
     private String link;
     private String nomeTabela;
+    private List<String> atributos;
 
-    public BaseDeDadosModel(String link, String nomeTabela) {
+    public BaseDeDadosModel(String link, String nomeTabela, List<String> atributos) {
         this.link = link;
         this.nomeTabela = nomeTabela;
+        this.atributos = atributos;
     }
 
     public String getLink() {
@@ -37,6 +40,14 @@ public class BaseDeDadosModel implements Serializable {
 
     public void setNomeTabela(String nomeTabela) {
         this.nomeTabela = nomeTabela;
+    }
+
+    public List<String> getAtributos() {
+        return atributos;
+    }
+
+    public void setAtributos(List<String> atributos) {
+        this.atributos = atributos;
     }
 
 }

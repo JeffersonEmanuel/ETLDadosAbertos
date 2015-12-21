@@ -26,13 +26,11 @@ public class Bean implements Serializable {
     private List<BaseDeDadosModel> listaDeLinks;
     private LerArquivo ler;
     BaixarDeURL baixarDeURL;
-    private List<List<String>> listaDeAtributosTemp;
     GerarAtributos gerar;
     private List<String> listaDeRegistros;
 
     public Bean() {
         ler = new LerArquivo();
-        listaDeAtributosTemp = new ArrayList<>();
         gerar = new GerarAtributos();
         listaDeRegistros = new ArrayList<>();;
         listaDeLinks = new ArrayList<>();
@@ -50,19 +48,11 @@ public class Bean implements Serializable {
 
     public void adicionarRegistros() {
         baixarDeURL.gravaArquivoDeURL(link);
-        listaDeLinks.add(new BaseDeDadosModel(link, nomeTabela));
+        ler.lerArquivoTxt();
+        listaDeLinks.add(new BaseDeDadosModel(link, nomeTabela, ler.getListaDeAtributos()));
         link = null;
         nomeTabela = null;
-        ler.lerArquivoTxt();
-        listaDeAtributosTemp.add(ler.getListaDeAtributos());
 
-    }
-
-    public List<String> getListaDeAtributos() {
-        for (List<String> lista : listaDeAtributosTemp) {
-            return lista;
-        }
-        return null;
     }
 
     public void removerRegistros(BaseDeDadosModel baseDeDadosModel) {
