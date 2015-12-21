@@ -39,10 +39,9 @@ public class Bean implements Serializable {
         baixarDeURL = new BaixarDeURL();
     }
 
-    public void enviar() {
+    public void salvar() {
 
-        ler.lerArquivoTxt();
-
+        gerar.gerarDados("BancoTeste2", "ColecaoTeste", ler.getListaDeAtributos(), ler.lerArquivoTxt());
 //        atributos.gerarTabela(ler.getListaDeAtributos(), nomeTabela);
 ////        listaDeAtributos = ler.getListaDeAtributos();
 //        listaDeRegistros = ler.getListaDeRegistros();
@@ -56,7 +55,7 @@ public class Bean implements Serializable {
         nomeTabela = null;
         ler.lerArquivoTxt();
         listaDeAtributosTemp.add(ler.getListaDeAtributos());
-        gerar.gerarDados("BancoTeste2", "ColecaoTeste", ler.getListaDeAtributos(), ler.lerArquivoTxt());
+
     }
 
     public List<String> getListaDeAtributos() {
