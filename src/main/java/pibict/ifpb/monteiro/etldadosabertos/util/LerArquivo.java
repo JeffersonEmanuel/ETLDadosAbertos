@@ -6,7 +6,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import pibict.ifpb.monteiro.etldadosabertos.constantes.ConstantesDoSistema;
 
 /**
@@ -21,8 +23,8 @@ public class LerArquivo {
     private List<String> listaDeRegistros = new ArrayList<>();
     private ConstantesDoSistema cns = new ConstantesDoSistema();
 
-    public void lerArquivoTxt() {
-
+    public List<List<String>> lerArquivoTxt() {
+        List<List<String>> llregistros = new ArrayList<>();
         try {
             int i = 0;
             String atributos = null;
@@ -44,6 +46,7 @@ public class LerArquivo {
             while (linha != null) {
                 linha = linha.replace("\"", " ");
                 listaDeRegistros = Arrays.asList(linha.split(","));
+                llregistros.add(listaDeRegistros);
                 registroGIS = verificarValorGIS(listaDeRegistros);
                 linha = lerArq.readLine();
             }
@@ -53,6 +56,7 @@ public class LerArquivo {
 
             System.err.printf("Erro na abertura do arquivo: %s.\n", e.getMessage());
         }
+        return llregistros;
     }
 
     /**

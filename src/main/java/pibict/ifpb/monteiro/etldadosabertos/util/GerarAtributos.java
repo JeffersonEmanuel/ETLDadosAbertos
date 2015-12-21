@@ -1,12 +1,11 @@
 package pibict.ifpb.monteiro.etldadosabertos.util;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.MongoClient;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -18,45 +17,34 @@ public class GerarAtributos {
     public GerarAtributos() {
     }
 
-    public static Connection con() {
-        String url = "jdbc:postgresql://localhost:5432/etldadosabertos";
-        String usuario = "admin";
-        String senha = "123";
-        Connection con = null;
-        try {
-            Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection(url, usuario, senha);
+    public DBCollection con(String nomeDoBanco, String nomeDaColecao) {
+        MongoClient mongoClient = new MongoClient("localhost", 27017);
+        DB db = mongoClient.getDB(nomeDoBanco);
+        DBCollection coll = db.getCollection(nomeDaColecao);
 
-            System.out.println("Conexão realizada com sucesso.");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GerarAtributos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(GerarAtributos.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return con;
+        return coll;
     }
 
-    public void gerarTabela(List<String> atributos, String nomeTabela) {
-        try {
-
-            Statement stmt = con().createStatement();
-//            stmt.executeUpdate("DROP TABLE tabela_modelo");
-            String t = null;
-            for (String atributo : atributos) {
-                atributo = atributo.replace(" ", "_");
-                atributo = atributo.replace("(", "_");
-                atributo = atributo.replace(")", "_");
-                atributo = atributo.replace("/", "_");
-                t += atributo + " VARCHAR(254),";
+    public void gerarDados(String nomeDoBanco, String nomeDaColecao,
+            List<String> atributos, List<List<String>> registros) {
+        DBCollection conexao = con(nomeDoBanco, nomeDaColecao);
+        for (List<String> registro : registros) {
+            BasicDBObject object = new BasicDBObject();
+            for (int i = 0; i < registro.size(); i++) {
+                if (registro.get(i).length() > 0) {
+                    object.put(atributos.get(i), registro.get(i));
+                }
             }
-            t = t.substring(4, (t.length() - 1));
-            String sql = "CREATE TABLE "+nomeTabela+"(" + t + ")";
-            System.out.println(sql);
-            stmt.executeUpdate(sql);
-            con().close();
-            System.out.println("Completo com Sucesso");
-        } catch (SQLException e) {
-            e.printStackTrace();
+            conexao.insert(object);
+        }
+    }
+
+    public void buscarTodosRegustros(String nomeDoBanco, String nomeDaColecao) {
+        DBCollection conexao = con(nomeDoBanco, nomeDaColecao);
+        DBCursor cursor2 = conexao.getDB().getCollection(nomeDaColecao).find();
+
+        while (cursor2.hasNext()) {
+            System.out.println(cursor2.next());
         }
 
     }

@@ -7,7 +7,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import pibict.ifpb.monteiro.etldadosabertos.model.BaseDeDadosModel;
 import pibict.ifpb.monteiro.etldadosabertos.util.BaixarDeURL;
-import pibict.ifpb.monteiro.etldadosabertos.util.ExcluirArquivos;
+import pibict.ifpb.monteiro.etldadosabertos.util.GerarAtributos;
 import pibict.ifpb.monteiro.etldadosabertos.util.LerArquivo;
 
 /**
@@ -26,42 +26,40 @@ public class Bean implements Serializable {
     private List<BaseDeDadosModel> listaDeLinks;
     private LerArquivo ler;
     BaixarDeURL baixarDeURL;
-    private  List<List<String>> listaDeAtributosTemp;
-//    private List<String> listaDeRegistros;
+    private List<List<String>> listaDeAtributosTemp;
+    GerarAtributos gerar;
+    private List<String> listaDeRegistros;
 
     public Bean() {
         ler = new LerArquivo();
         listaDeAtributosTemp = new ArrayList<>();
-//        listaDeRegistros = new ArrayList<>();
-//        listaDeAtributos.add("");
+        gerar = new GerarAtributos();
+        listaDeRegistros = new ArrayList<>();;
         listaDeLinks = new ArrayList<>();
         baixarDeURL = new BaixarDeURL();
     }
-//
-//    public void enviar() {
-//
-       
-//
-//        ler.lerArquivoTxt();
-//        GerarAtributos atributos = new GerarAtributos();
+
+    public void enviar() {
+
+        ler.lerArquivoTxt();
+
 //        atributos.gerarTabela(ler.getListaDeAtributos(), nomeTabela);
 ////        listaDeAtributos = ler.getListaDeAtributos();
 //        listaDeRegistros = ler.getListaDeRegistros();
 //        ExcluirArquivos.removerArquivos(ConstantesDoSistema.diretorio);
-//    }
+    }
 
     public void adicionarRegistros() {
         baixarDeURL.gravaArquivoDeURL(link);
         listaDeLinks.add(new BaseDeDadosModel(link, nomeTabela));
         link = null;
         nomeTabela = null;
-         ler.lerArquivoTxt();
-         listaDeAtributosTemp.add(ler.getListaDeAtributos());
-         System.out.println(listaDeAtributosTemp);
+        ler.lerArquivoTxt();
+        listaDeAtributosTemp.add(ler.getListaDeAtributos());
+        gerar.gerarDados("BancoTeste2", "ColecaoTeste", ler.getListaDeAtributos(), ler.lerArquivoTxt());
     }
-    
-    
-    public List<String> getListaDeAtributos () {
+
+    public List<String> getListaDeAtributos() {
         for (List<String> lista : listaDeAtributosTemp) {
             return lista;
         }
@@ -73,7 +71,10 @@ public class Bean implements Serializable {
 
     }
 
-    
+    public void salvarRegistros() {
+
+    }
+
     public String getLink() {
         return link;
     }
@@ -98,6 +99,4 @@ public class Bean implements Serializable {
         this.listaDeLinks = listaDeLinks;
     }
 
-   
-    
 }
