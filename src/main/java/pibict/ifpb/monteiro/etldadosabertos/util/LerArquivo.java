@@ -44,8 +44,8 @@ public class LerArquivo {
 
             boolean registroGIS = false;
             while (linha != null) {
-                linha = linha.replace("\"", " ");
-                listaDeRegistros = Arrays.asList(linha.split(","));
+//                linha = linha.replace("\"", " ");
+                listaDeRegistros = Arrays.asList(linha.split("\",\""));
                 llregistros.add(listaDeRegistros);
                 registroGIS = verificarValorGIS(listaDeRegistros);
                 linha = lerArq.readLine();
