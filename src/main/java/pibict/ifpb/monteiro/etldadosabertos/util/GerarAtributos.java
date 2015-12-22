@@ -59,26 +59,28 @@ public class GerarAtributos {
         }
     }
 
-    public void consulta(String consulta) { 
+    public List<String> consulta(String consulta) {
         DBCollection conexao = con();
         BasicDBObject query = new BasicDBObject();
         List<String> dados = separarValores(consulta);
+        List<String> retorno = new ArrayList<>();
         for (int i = 0; i < dados.size(); i += 2) {
-            System.out.println(dados.get(i) + dados.get(i+1));
-            query.put(dados.get(i), dados.get(i+1));
+            query.put(dados.get(i), dados.get(i + 1));
         }
 
         DBCursor db = conexao.find(query);
 
         while (db.hasNext()) {
-            System.out.println(db.next());
+            retorno.add(db.next().toString());
+
         }
+
+        return retorno;
 
     }
 
-    
-    public List<String> separarValores(String consulta){
-        
+    public List<String> separarValores(String consulta) {
+
         String[] bloco = consulta.split(",");
         List<String> blocos = new ArrayList<>();
         for (String string : bloco) {
@@ -87,9 +89,7 @@ public class GerarAtributos {
             blocos.add(aux[1]);
         }
         return blocos;
-        
+
     }
-    
-    
-    
+
 }

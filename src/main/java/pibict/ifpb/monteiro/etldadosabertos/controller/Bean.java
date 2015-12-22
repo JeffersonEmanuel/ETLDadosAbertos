@@ -30,9 +30,11 @@ public class Bean implements Serializable {
     BaixarDeURL baixarDeURL;
     GerarAtributos gerar;
     private List<String> listaDeRegistros;
+    private List<String> retornoConsulta;
     private String consulta;
-    
+
     public Bean() {
+        retornoConsulta = new ArrayList<>();
         ler = new LerArquivo();
         gerar = new GerarAtributos();
         listaDeRegistros = new ArrayList<>();;
@@ -44,9 +46,10 @@ public class Bean implements Serializable {
         gerar.gerarDados(ler.getListaDeAtributos(), ler.lerArquivoTxt());
         gerar.buscarTodosRegustros();
     }
-    
-    public void realizarConsulta () {
-        gerar.consulta(consulta);
+
+    public void realizarConsulta() {
+        System.out.println(gerar.consulta(consulta));
+        retornoConsulta = gerar.consulta(consulta);
     }
 
     public void adicionarRegistros() {
@@ -104,5 +107,13 @@ public class Bean implements Serializable {
     public void setConsulta(String consulta) {
         this.consulta = consulta;
     }
-    
+
+    public List<String> getRetornoConsulta() {
+        return retornoConsulta;
+    }
+
+    public void setRetornoConsulta(List<String> retornoConsulta) {
+        this.retornoConsulta = retornoConsulta;
+    }
+
 }
