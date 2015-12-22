@@ -18,18 +18,28 @@
 
         <h:form id="formPrincipal">
 
-            <div style="height: 9%; margin-top: 10; background-color: blanchedalmond; width: 87%; margin-left: 5.3%" >
+            <div style="height: 15%; margin-top: 10; background-color: blanchedalmond; width: 87%; margin-left: 5.3%" >
                 <div style="height: 8; background-color: blanchedalmond;width: 60%;" />
                 <h:panelGrid columns="2" style="margin-left: 2%" id="painelBase">
-                    <h:outputText value="Nome da Base de Dados: " style="margin-right: 470"/>
+                    <h:outputText value="Base de Dados: " style="margin-right: 40"/>
                     <h:outputText value="Link Base de Dados: "/>
                     <p:inputText value="#{bean.nomeTabela}" size="45"/>
                     <p:row>
-                        <p:inputText value="#{bean.link}" size="78"/>
+                        <p:inputText value="#{bean.link}" size="45"/>
                         <p:commandButton value="Adicionar" action="#{bean.adicionarRegistros}"
                                          style="margin-left: 20px ; border-radius: 10px;" update="formPrincipal" process="@all"/>
                     </p:row>
                 </h:panelGrid>
+            </div>
+
+            <div class="div-generic" >
+                <p:inputTextarea class="itextarea" placeholder="Ex: key:value, key2:value2... " value="#{bean.consulta}" rows="6" autoResize="false"/>
+                <p:commandButton id="bt-query-consultar" value="Consultar" class="botao-generic" action="#{bean.realizarConsulta()}"/>
+            </div>
+
+            <div class="div-generic">
+                <p:inputTextarea class="itextarea" placeholder="Resultado..." value="" rows="6" autoResize="false" />
+               
             </div>
 
 

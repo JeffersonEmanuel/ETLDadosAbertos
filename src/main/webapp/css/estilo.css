@@ -43,10 +43,18 @@ fieldset{
     border-radius: 20px;
 }
 
-.itextarea-query{
-    margin-left: 15%;
-    margin-right: 5.5%;
+.itextarea{
+    margin-left: 2%;
+    margin-right: 2%;
     margin-top: 1%;
-    width: 70%;
+    width: 85%;
     height: 80%;
+}
+
+.div-generic{
+    height: 25%;
+    margin-top: 5px;
+    background-color: bisque;
+    width: 87%;
+    margin-left: 5.3%;
 }
