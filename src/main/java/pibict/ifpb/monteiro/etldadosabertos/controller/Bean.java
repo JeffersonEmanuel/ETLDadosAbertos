@@ -1,7 +1,9 @@
 package pibict.ifpb.monteiro.etldadosabertos.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -28,7 +30,8 @@ public class Bean implements Serializable {
     BaixarDeURL baixarDeURL;
     GerarAtributos gerar;
     private List<String> listaDeRegistros;
-
+    private String consulta;
+    
     public Bean() {
         ler = new LerArquivo();
         gerar = new GerarAtributos();
@@ -38,12 +41,12 @@ public class Bean implements Serializable {
     }
 
     public void salvar() {
-
-        gerar.gerarDados("BancoTeste2", "ColecaoTeste", ler.getListaDeAtributos(), ler.lerArquivoTxt());
-//        atributos.gerarTabela(ler.getListaDeAtributos(), nomeTabela);
-////        listaDeAtributos = ler.getListaDeAtributos();
-//        listaDeRegistros = ler.getListaDeRegistros();
-//        ExcluirArquivos.removerArquivos(ConstantesDoSistema.diretorio);
+        gerar.gerarDados(ler.getListaDeAtributos(), ler.lerArquivoTxt());
+        gerar.buscarTodosRegustros();
+    }
+    
+    public void realizarConsulta () {
+        gerar.consulta(consulta);
     }
 
     public void adicionarRegistros() {
@@ -57,10 +60,6 @@ public class Bean implements Serializable {
 
     public void removerRegistros(BaseDeDadosModel baseDeDadosModel) {
         listaDeLinks.remove(baseDeDadosModel);
-
-    }
-
-    public void salvarRegistros() {
 
     }
 
@@ -87,5 +86,23 @@ public class Bean implements Serializable {
     public void setListaDeLinks(List<BaseDeDadosModel> listaDeLinks) {
         this.listaDeLinks = listaDeLinks;
     }
+    boolean teste = false;
+    List<String> ex = new ArrayList<>();
 
+    public List<String> getRegistroExemplo() {
+        if (teste == false) {
+            List<String> ex1 = ler.getListaDeRegistros();
+            teste = true;
+        }
+        return ex;
+    }
+
+    public String getConsulta() {
+        return consulta;
+    }
+
+    public void setConsulta(String consulta) {
+        this.consulta = consulta;
+    }
+    
 }
