@@ -44,10 +44,48 @@ public class LerArquivo {
 
             boolean registroGIS = false;
             while (linha != null) {
-//                linha = linha.replace("\"", " ");
-                listaDeRegistros = Arrays.asList(linha.split("\",\""));
-                llregistros.add(listaDeRegistros);
+//                linha = linha.replace("\"", "");
+                listaDeRegistros = Arrays.asList(linha.split(","));
                 registroGIS = verificarValorGIS(listaDeRegistros);
+                if (registroGIS) {
+                    boolean montarGIS = false;
+                    String novoValor = "";
+                    int aux = 0;
+                    int aux2 = 0;
+                    for (int j = 0; j < listaDeRegistros.size(); j++) {
+                        if (listaDeRegistros.get(j).contains("\"")) {
+                            montarGIS = !montarGIS;
+                            if (novoValor.isEmpty()) {
+                                aux = j;
+                                novoValor = listaDeRegistros.get(j);
+                            } else {
+                                aux2 = j;
+                                novoValor = novoValor + ", " + listaDeRegistros.get(j);
+                            }
+                        } else if (montarGIS) {
+                            novoValor = novoValor + ", " + listaDeRegistros.get(j);
+                        }
+                    }
+                    //Apos ser criado uma nova String com o valor correto
+                    //Corrigi o valor do registro antigo
+                    listaDeRegistros.set(aux, novoValor);
+
+                    //Lista para remocao dos valores nao desejaveis
+                    // que logo apos sera setada como a principal
+                    ArrayList<String> correcaoLista = new ArrayList<>();
+                    correcaoLista.addAll(listaDeRegistros);
+                    System.out.println("Valores da lista antes da correcao: "+ correcaoLista);
+                    System.out.println("Tamanho da lista antes da correcao: " + correcaoLista.size());
+                    for(int a = aux+1; a < aux2 ; a++){
+                        correcaoLista.remove(a);
+                        aux2 --;
+                    }
+                    System.out.println("Valores da lista depois da correcao: "+ correcaoLista);
+                    System.out.println("Tamanho da lista depois da correcao: " + correcaoLista.size());
+                    System.out.println("O tamanho da lista deve ser igual a: " + listaDeAtributos.size());
+                    setListaDeRegistros(correcaoLista);
+                }
+                llregistros.add(listaDeRegistros);
                 linha = lerArq.readLine();
             }
             System.out.println("Registro existe? " + registroGIS + " // Atributo existe? " + atributoGIS);
