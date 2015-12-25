@@ -68,27 +68,22 @@ public class LerArquivo {
                     }
                     //Apos ser criado uma nova String com o valor correto
                     //Corrigi o valor do registro antigo
+                    novoValor = novoValor.replace("\"", "");
                     listaDeRegistros.set(aux, novoValor);
 
                     //Lista para remocao dos valores nao desejaveis
                     // que logo apos sera setada como a principal
                     ArrayList<String> correcaoLista = new ArrayList<>();
                     correcaoLista.addAll(listaDeRegistros);
-                    System.out.println("Valores da lista antes da correcao: "+ correcaoLista);
-                    System.out.println("Tamanho da lista antes da correcao: " + correcaoLista.size());
-                    for(int a = aux+1; a < aux2 ; a++){
-                        correcaoLista.remove(a);
-                        aux2 --;
+                    int repeticaoRemocao = aux2 - aux;
+                    for(int a = 0; a < repeticaoRemocao ; a++){
+                        correcaoLista.remove(aux+1);
                     }
-                    System.out.println("Valores da lista depois da correcao: "+ correcaoLista);
-                    System.out.println("Tamanho da lista depois da correcao: " + correcaoLista.size());
-                    System.out.println("O tamanho da lista deve ser igual a: " + listaDeAtributos.size());
                     setListaDeRegistros(correcaoLista);
                 }
                 llregistros.add(listaDeRegistros);
                 linha = lerArq.readLine();
             }
-            System.out.println("Registro existe? " + registroGIS + " // Atributo existe? " + atributoGIS);
 
         } catch (IOException e) {
 
