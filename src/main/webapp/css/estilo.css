@@ -50,6 +50,7 @@ fieldset{
     margin-bottom: 2%;
     width: 96%;
     height: 70%;
+    resize: none;
 }
 
 
@@ -73,6 +74,7 @@ fieldset{
     margin-top: 2%;
     width: 96%;
     height: 90%;
+    resize: none;
 }
 
 
@@ -86,5 +88,6 @@ fieldset{
     margin-right: 1%;
     background-color: bisque;
     width: 95%;
+    size: 3pt;
 
 }

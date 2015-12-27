@@ -33,24 +33,27 @@
 
 
             <div >
+                <h:form id="idDlg">
+                    <p:dialog widgetVar="dlgConsulta" width="1400" height="720" resizable="false">
 
-                <p:dialog widgetVar="dlgConsulta" width="1400" height="720" resizable="false">
-                    <div style="height: 6%; background-color: dimgrey; width: 95%; margin-left: 1%" >
-                        <p:commandButton id="bt-query-consultar" value="Consultar" class="botao-generic" action="#{bean.realizarConsulta()}" style="margin-left: 90%; margin-top: 0.35%"/>
-                    </div>
-                    <div class="div-generic-consulta" >
-                        <p:inputTextarea class="itextarea-consulta" placeholder="Ex: key:value, key2:value2... " value="#{bean.consulta}" rows="3" autoResize="false" />
+                        <div style="height: 6%; background-color: dimgrey; width: 95%; margin-left: 1%" >
+                            <p:commandButton id="bt-query-consultar" value="Consultar" class="botao-generic" action="#{bean.realizarConsulta()}" 
+                                             style="margin-left: 90%; margin-top: 0.35%" update=":formPrincipal:idDlg" />
+                        </div>
+                        <div class="div-generic-consulta" >
+                            <p:inputTextarea class="itextarea-consulta" placeholder="Ex: key:value, key2:value2... " value="#{bean.consulta}" rows="3" autoResize="false" />
 
-                    </div>
+                        </div>
 
-                    <div class="div-generic-consulta-resposta">
-                        <p:inputTextarea class="itextarea-consulta-resposta" placeholder="Resultado..."  readonly="true" rows="6" autoResize="false" />
+                        <div class="div-generic-consulta-resposta">
+                            <p:inputTextarea class="itextarea-consulta-resposta" placeholder="Resultado..."  value="#{bean.retornoConsulta}"
+                                             readonly="true" rows="6" autoResize="false" />
 
-                    </div>
+                        </div>
 
 
-                </p:dialog>
-
+                    </p:dialog>
+                </h:form>
 
                 <h:dataTable value="#{bean.listaDeLinks}" var="dado" id="painelAmostra" style="margin-left: 5%" >
 

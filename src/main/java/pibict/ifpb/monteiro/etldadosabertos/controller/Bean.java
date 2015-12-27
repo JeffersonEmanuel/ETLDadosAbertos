@@ -109,7 +109,11 @@ public class Bean implements Serializable {
     }
 
     public List<String> getRetornoConsulta() {
-        return retornoConsulta;
+        List<String> n = new ArrayList<>();
+        for (String r : retornoConsulta) {
+            n.add(r + "\n \r");
+        }
+        return n;
     }
 
     public void setRetornoConsulta(List<String> retornoConsulta) {
