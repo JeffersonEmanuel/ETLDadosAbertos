@@ -81,7 +81,7 @@ public class GerarAtributos {
 
     public List<String> separarValores(String consulta) {
 
-        String[] bloco = consulta.split(",");
+        String[] bloco = consulta.split(";");
         List<String> blocos = new ArrayList<>();
         for (String string : bloco) {
             String[] aux = string.split(":");

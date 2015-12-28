@@ -41,7 +41,7 @@
                                              style="margin-left: 90%; margin-top: 0.35%" update=":formPrincipal:idDlg" />
                         </div>
                         <div class="div-generic-consulta" >
-                            <p:inputTextarea class="itextarea-consulta" placeholder="Ex: key:value, key2:value2... " value="#{bean.consulta}" rows="3" autoResize="false" />
+                            <p:inputTextarea class="itextarea-consulta" placeholder="Ex: key:value; key2:value2... " value="#{bean.consulta}" rows="3" autoResize="false" />
 
                         </div>
 
@@ -74,8 +74,11 @@
                                             <h:dataTable value="#{dado.atributos}" var="atributo" id="attr" style="column-span: 15" >
                                                 <p:column>
                                                     <h:panelGrid columns="#{atributos.size()}">
-                                                        <p:inputText value="#{atributo}" size="25"/>
+                                                        <p:row>
+                                                            <p:inputText value="#{atributo}" size="25" style="margin-right: 20"/>
+                                                        </p:row>
                                                     </h:panelGrid>
+
                                                 </p:column>
 
                                             </h:dataTable>
